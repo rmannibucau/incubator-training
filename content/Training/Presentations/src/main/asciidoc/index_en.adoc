@@ -20,15 +20,19 @@
 == !
 :description: 45 minute talk on Apache Training
 :keywords: Apache Mynewt
-:authors: Your name here
-:email: Your email here
+:authors: Justin Mclean
 image::ApacheLogo.png[]
 
 == Apache Training Contributing More Than Just Code
 {authors}
 
 == Who am I?
-* TODO fill in your own details here
+* Freelance Developer - programming for 25 years
+* Incubator PMC plus a few other projects and Apache member
+* Mentor for several Apache products
+* VP of Apache Mynewt and Apache Incubator
+* Sydney IoT Meetup
+* Teacher UNSW, Dynamic Web Teaching, Open Collages
 
 == !
 image:training.png[width=50%]
@@ -265,4 +269,4 @@ with urllib.request.urlopen("https://whimsy.apache.org/public/public_ldap_people
 
 == Questions?
 Ask now, see me after the session,
-or email me at {email}.
+or email me at justin@classsoftware.com.
