@@ -28,10 +28,19 @@ image::ApacheLogo.png[]
 {authors}
 
 == Who am I?
-* TODO fill in you own details here
+* Freelance Developer - programming for 25 years
+* Current VP/chair of the Incubator and Apache Mynewt
+* Mentor for several Apache incubating projects
+* Run IoT workshops
+* Founded the IoT meetup in Sydney Australia
 
 == How I Got Here
-* TODO fill you your own story here
+* Been coding since the 80s started on low-level machine code and C programming
+* Worked on a few early “IoT” projects
+* Internet come along
+* Open Source Hardware come along
+* Started IoT Sydney Meetup
+* Few years back working on hardware and coding in C again
 
 == Things Have Changed
 * Access to low cost easy to program hardware
