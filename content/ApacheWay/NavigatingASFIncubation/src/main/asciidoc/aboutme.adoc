@@ -17,4 +17,8 @@
 
 ////
 
-* TODO Fill in your own your info here
+* Freelance Developer - programming for 25 years
+* Current VP/chair of the Incubator
+* Mentor for several Apache incubating projects
+* Reviewed 100's of releases
+* Involved in a number of Apache projects

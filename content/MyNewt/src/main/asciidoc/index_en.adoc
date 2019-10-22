@@ -20,8 +20,8 @@
 == !
 :description: 45-minute talk on Apache Mynewt
 :keywords: Apache Mynewt
-:authors: Your name here
-:email: Your email here
+:authors: Justin Mclean
+:email: justin@classsoftware.com
 image::ApacheLogo.png[]
 
 == Apache Mynewt +
@@ -54,7 +54,7 @@ image:mynewt.png[width=50%]
 
 [.notes]
 --
-Mynewt project got several venders to relicense under more permissive licenses
+Mynewt project got several vendors to re-license under more permissive licenses
 --
 
 == Why ASF?
@@ -395,3 +395,6 @@ https://github.com/apache/mynewt-core/tree/master
 == Questions?
 Ask now, see me after the session,
 or email me at {email}.
+
+These slides are part of the Apache Training project.
+https://training.apache.org

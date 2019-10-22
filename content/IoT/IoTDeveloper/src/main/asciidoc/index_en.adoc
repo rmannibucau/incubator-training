@@ -20,8 +20,8 @@
 == !
 :description: 45-minute talk on how to be an IoT Developer
 :keywords: IoT
-:authors: Your name here
-:email: Your email here
+:authors: Justin Mclean
+:email: justin@classsoftware.com
 image::ApacheLogo.png[]
 
 == How to Become an IoT Developer (and Have Fun!)
@@ -362,3 +362,6 @@ Blink version number
 == Questions?
 Ask now, see me during the conference,
 or email me at {email}
+
+These slides are part of the Apache Training project.
+https://training.apache.org
