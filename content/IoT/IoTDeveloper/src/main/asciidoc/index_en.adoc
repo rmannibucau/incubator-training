@@ -22,10 +22,23 @@
 :keywords: IoT
 :authors: Justin Mclean
 :email: justin@classsoftware.com
-image::ApacheLogo.png[]
+image::berlin1.jpg[canvas,size=contain]
 
-== How to Become an IoT Developer (and Have Fun!)
-{authors}
+[.centered]
+--
+How to Become an IoT Developer (and Have Fun!)
+
+'''
+
+Justin Mclean
+--
+
+[.conferenceName]
+APACHECON EUROPE +
+Oct. 22nd - 24th
+
+[.year]
+2019
 
 == Who am I?
 * Freelance Developer - programming for 25 years
