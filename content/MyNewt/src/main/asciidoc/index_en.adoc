@@ -22,11 +22,25 @@
 :keywords: Apache Mynewt
 :authors: Justin Mclean
 :email: justin@classsoftware.com
-image::ApacheLogo.png[]
 
-== Apache Mynewt +
-ASF's Embedded OS Project
-{authors}
+image::berlin2.jpg[canvas,size=contain]
+
+[.centered]
+--
+Apache Mynewt ASF's Embedded OS Project
+
+'''
+
+Justin Mclean
+--
+
+
+[.conferenceName]
+APACHECON EUROPE +
+Oct. 22nd - 24th
+
+[.year]
+2019
 
 == Who am I?
 * Freelance Developer - programming for 25 years
