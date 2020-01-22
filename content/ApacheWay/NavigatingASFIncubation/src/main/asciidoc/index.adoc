@@ -18,17 +18,29 @@
 ////
 
 
-== Navigating the ASF Incubator Process
+== !
 :description: 45 minute talk on the Apache Way and navigating a project through the incubator
 :keywords: Apache Way,Incubator
+:talk: Navigating the ASF Incubator Process
 :author: Justin Mclean
 :email: justin@classsoftware.com
 :position: VP Incubator
-{author} +
-{position} +
-{email} +
 
-image::ApacheLogo.png[]
+image::berlin2.jpg[canvas,size=contain]
+
+[.centered]
+--
+{talk}
+
+'''
+
+{author}
+--
+
+
+[.conferenceName]
+APACHECON EUROPE +
+Oct. 22nd - 24th 2019
 
 == Who am I?
 include::aboutme.adoc[]
