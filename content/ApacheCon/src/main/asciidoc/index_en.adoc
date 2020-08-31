@@ -17,10 +17,10 @@
 
 ////
 
-:description: description
-:keywords: keywords
-:author: Your name
-:talk: This is where your talk title goes
+:description: After NoSQL discover CloudSQL databases
+:keywords: ApacheCon, Database, JPA, SQL, Java, Embedded
+:author: Enrico Olivelli & Romain Manni-Bucau
+:talk: After NoSQL discover CloudSQL databases
 :conference: APACHECON @Home
 :conference_eu: APACHECON EU
 :conference_na: APACHECON NA
