@@ -1,7 +1,12 @@
-require('./convert-slides');
+const render = require('./convert-slides');
 
 const express = require('express');
-const server = express(); // better instead
+const server = express();
+server.get('/', (req, res) => res.redirect('/index_en.html'));
+server.get('/render', (req, res) => {
+    render.render();
+    res.redirect('/index_en.html');
+});
 [
     'src/main/asciidoc/',
     'src/main/resources/images/',
@@ -9,7 +14,6 @@ const server = express(); // better instead
     'node_modules/reveal.js/',
     '.',
 ].forEach(it => server.use('/', express.static(it)));
-server.get('/', (req, res) => res.redirect('/index_en.html'));
 
 server.listen(4200);
 console.log('http://localhost:4200');

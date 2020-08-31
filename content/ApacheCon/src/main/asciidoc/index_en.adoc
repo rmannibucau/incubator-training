@@ -30,7 +30,7 @@
 
 [%notitle]
 == {talk}
-image:ApacheCon_bg.jpg[background,size=cover]
+image::ApacheCon_bg.jpg[background,size=cover]
 
 [.leftlogo]
 image:ApacheConAtHome.png[width=100%]
