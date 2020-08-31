@@ -5,7 +5,7 @@
   "main": "reveal.js",
   "scripts": {
     "render": "node convert-slides.js",
-    "serve": "node serve"
+    "serve": "node serve.js"
   },
   "keywords": [],
   "author": "",
