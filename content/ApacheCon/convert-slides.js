@@ -17,11 +17,27 @@
  * under the License.
  */
 
-// Load Asciidoctor.js and the reveal.js converter
-var asciidoctor = require('@asciidoctor/core')()
-var asciidoctorRevealjs = require('@asciidoctor/reveal.js')
-asciidoctorRevealjs.register()
+const asciidoctor = require('@asciidoctor/core')()
+const asciidoctorRevealjs = require('@asciidoctor/reveal.js')
+const options = {
+    safe: 'safe',
+    backend: 'revealjs',
+    templateDir: 'asciidoctor-reveal.js-',
+    attributes: {
+        imagesDir: 'src/main/resources/images',
+        revealjs_customtheme: 'apachecon.css',
+        revealjs_transition: 'linear',
+        'source-highlighter': 'highlightjs',
+        'title-slide-background-image': 'ApacheCon_bg.jpg',
+    },
+};
 
-// Convert the document using the reveal.js converter
-var options = { safe: 'safe', backend: 'revealjs' }
-asciidoctor.convertFile('src/main/asciidoc/index_en.adoc', options) 
+asciidoctorRevealjs.register();
+const render = function () {
+    console.log('Rendered slides');
+    asciidoctor.convertFile('src/main/asciidoc/index_en.adoc', options);
+};
+
+render();
+
+module.exports.render = render;

@@ -4,13 +4,15 @@
   "description": "Slides for ApacheCon",
   "main": "reveal.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "render": "node convert-slides.js",
+    "serve": "node serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@asciidoctor/reveal.js": "^3.1.0",
-    "asciidoctor": "^2.1.0"
+    "asciidoctor": "^2.2.0",
+    "express": "4.17.1"
   }
 }
