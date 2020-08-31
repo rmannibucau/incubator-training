@@ -12,6 +12,7 @@ server.get('/render', (req, res) => {
     'src/main/resources/images/',
     'src/main/theme/',
     'node_modules/reveal.js/',
+    'node_modules/highlight.js/',
     '.',
 ].forEach(it => server.use('/', express.static(it)));
 

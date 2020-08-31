@@ -26,9 +26,12 @@ const options = {
     attributes: {
         imagesDir: 'src/main/resources/images',
         revealjs_customtheme: 'apachecon.css',
-        revealjs_transition: 'linear',
+        'revealjs_transition': 'linear',
+        'revealjs_slidenumber': true,
+        'revealjs_history': true,
         'source-highlighter': 'highlightjs',
         'title-slide-background-image': 'ApacheCon_bg.jpg',
+        'highlightjs-theme': 'styles/github.css',
     },
 };
 
