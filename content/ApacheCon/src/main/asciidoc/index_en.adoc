@@ -50,6 +50,20 @@ image:ApacheConAtHome.png[width=100%]
 {year}
 
 [%notitle]
+== Introducing HerdDB
+Why HerdDB ?
+
+HerdDB started inside EmailSuccess.com as a replacement for MySQL.
+
+EmailSuccess is a pure Java application and it is a distributed system.
+
+.HerdDB design requirements:
+* Support JDBC and be compatible with MySQL dialect.
+* Run embedded in the host client Java application.
+* Support high-availability.
+* Support horizontal scalability.
+
+[%notitle]
 == {talk}
 image::AtHomeSpiceRack.jpg[canvas]
 
