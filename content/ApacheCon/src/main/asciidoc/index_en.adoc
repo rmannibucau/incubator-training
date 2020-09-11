@@ -32,7 +32,7 @@
 == {talk}
 image::ApacheCon_bg.jpg[background,size=cover]
 
-[.leftlogo]
+[.toplogo]
 image:ApacheConAtHome.png[width=100%]
 
 [.righttitle]
@@ -49,8 +49,19 @@ image:ApacheConAtHome.png[width=100%]
 [.year]
 {year}
 
-[%notitle]
+== Enrico Olivelli
+
+TBD
+
+== Romain Manni-Bucau
+
+image:romain/twitter.png[width=100%]
+image:romain/blog.png[width=100%]
+image:romain/github.png[width=100%]
+image:romain/yupiik.png[width=100%]
+
 == Introducing HerdDB
+
 Why HerdDB ?
 
 HerdDB started inside EmailSuccess.com as a replacement for MySQL.
@@ -62,6 +73,91 @@ EmailSuccess is a pure Java application and it is a distributed system.
 * Run embedded in the host client Java application.
 * Support high-availability.
 * Support horizontal scalability.
+
+== JDBC is good but JPA is better
+
+[%step]
+* JDBC is low level
+* Lot of applications using JPA for
+** Simpler coding/maintenance
+** Database portability
+* So question is:
++
+> What if HerdDB would work with JPA?
+
+== JPA setup
+
+> JPA uses JDBC under the hood.
+
+...so it is trivial, right?
+
+== JPA Challenges
+
+[%step]
+* JPA issue SQL statements. All database are all SQL based but make it vary/enhance it
+* All databases use custom types (even if some overlap)
++
+> So all JPA providers abstract each database by a dialect/dictionary/platform.
+* Joins must be supported
+* Case must be handled
++
+> All default OpenJPA dictionnaries are case insensitive for example.
+* Delimiters must be handled properly
+* Reserved words must be handled
+
+== JPA statements example
+
+[source,sql]
+----
+CREATE TABLE `MyEntity` (
+    `id` VARCHAR(255) NOT NULL, `created` TIMESTAMP, `updated` TIMESTAMP,
+    `name` VARCHAR(255), `notSortable` VARCHAR(255),
+    `version` BIGINT, PRIMARY KEY (`id`))
+CREATE TABLE `MyEntity_tags` (`MyEntity_id` VARCHAR(255), `element` VARCHAR(255))
+
+CREATE INDEX `I_MYNTTGS_MYENTITY_ID` 
+    ON `MyEntity_tags` (`MyEntity_id`)
+
+INSERT INTO `MyEntity` (`id`, `created`, `updated`, `name`, `notSortable`, `version`) 
+    VALUES (?, ?, ?, ?, ?, ?)
+
+SELECT t0.`id`, t0.`version`, t0.`created`, t0.`updated`, t0.`name`, t0.`notSortable` 
+    FROM `MyEntity` t0 ORDER BY t0.`name` ASC
+
+DELETE FROM `MyEntity_tags` WHERE `MyEntity_id` = ? 
+DELETE FROM `MyEntity` WHERE `id` = ? AND `version` = ? 
+----
+
+== Custom OpenJPA dictionary
+
+[source]
+----
+[main] INFO openjpa.Runtime - Starting OpenJPA 3.1.3-SNAPSHOT
+[main] INFO openjpa.jdbc.JDBC - Using dictionary class "org.apache.openjpa.jdbc.sql.HerdDBDictionary" (HerdDB  ,HerdDB 0.0).
+[main] INFO openjpa.jdbc.JDBC - Connected to HerdDB version 0.0 using JDBC driver HerdDB version 0.0.
+----
+
+== Usage challenges
+
+[%step]
+* Application often use H2/HSQLDB for fast testing roudtrips
+** HerdDB must be close to keep a fluent testing workflow
+* H2/HSQLDB are light
+** HerdDB must stay light (in its fatjar bundle) to compete with these alternatives in embed mode
+
+== Usage figures
+
+TBD: sizes, times, graphs, etc...
+
+[%notitle.big-thanks]
+== Thanks
+image::ApacheCon_bg.jpg[background,size=cover]
+
+[.toplogo]
+image:ApacheConAtHome.png[width=100%]
+
+Thanks
+Questions?
 
 [%notitle]
 == {talk}

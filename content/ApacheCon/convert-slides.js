@@ -36,10 +36,7 @@ const options = {
 };
 
 asciidoctorRevealjs.register();
-const render = function () {
-    console.log('Rendered slides');
-    asciidoctor.convertFile('src/main/asciidoc/index_en.adoc', options);
-};
+const render = () => asciidoctor.convertFile('src/main/asciidoc/index_en.adoc', options);
 
 render();
 

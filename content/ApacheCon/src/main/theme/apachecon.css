@@ -479,3 +479,24 @@ body {
   -moz-column-count: 2;
   column-count: 2;
 }
+
+.big-thanks p {
+  font-size: 10rem;
+  color: white;
+}
+
+.toplogo {
+  position: fixed;
+  left: -800px;
+  top: -250px;
+}
+
+
+div.openblock.righttitle > div.content > div:first-child.paragraph {
+  font-size: 4rem;
+}
+
+.reveal {
+  background-size: cover;
+  background-image: url(background.jpg)
+}

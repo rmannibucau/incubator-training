@@ -20,13 +20,25 @@ server.listen(4200);
 console.log('http://localhost:4200');
 
 if (process.env.WATCH) {
-    require('chokidar')
-        .watch('src/main/asciidoc', {
-            persistent: true,
-            ignored: '**/*.html',
-        })
-        .on('add', path => render.render())
-        .on('change', path => render.render())
-        .on('unlink', path => render.render())
-        .on('ready', () => render.render());
+    let ready = 0;
+    const rerender = why => {
+        if (ready < 2) {
+            return;
+        }
+        render.render();
+        console.log('Re-rendered slides: ' + why);
+    };
+    const chokidar = require('chokidar');
+    ['src/main/asciidoc', 'src/main/resources/images'].forEach(folder =>
+        chokidar
+            .watch(`${folder}/**`, {
+                persistent: true,
+                ignored: '**/*.html',
+                ignoreInitial: true,
+            })
+            .on('add', path => rerender(path + ' was added'))
+            .on('change', path => rerender(path + ' changed'))
+            .on('unlink', path => rerender(path + ' was deleted'))
+            .on('ready', () => ready++));
+    ready++;
 }
