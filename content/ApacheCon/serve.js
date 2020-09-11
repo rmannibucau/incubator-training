@@ -18,3 +18,15 @@ server.get('/render', (req, res) => {
 
 server.listen(4200);
 console.log('http://localhost:4200');
+
+if (process.env.WATCH) {
+    require('chokidar')
+        .watch('src/main/asciidoc', {
+            persistent: true,
+            ignored: '**/*.html',
+        })
+        .on('add', path => render.render())
+        .on('change', path => render.render())
+        .on('unlink', path => render.render())
+        .on('ready', () => render.render());
+}

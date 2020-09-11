@@ -5,7 +5,8 @@
   "main": "reveal.js",
   "scripts": {
     "render": "node convert-slides.js",
-    "serve": "node serve.js"
+    "serve": "node serve.js",
+    "serve-dev": "WATCH=true node serve.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
   "dependencies": {
     "@asciidoctor/reveal.js": "^3.1.0",
     "asciidoctor": "^2.2.0",
+    "chokidar": "^3.4.2",
     "express": "4.17.1",
     "highlight.js": "10.1.2"
   }

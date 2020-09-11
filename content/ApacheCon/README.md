@@ -23,6 +23,10 @@ To serve the slides via:
 
 `npm run serve`
 
+To serve the slides and watch changes, run:
+
+`npm run serve-dev`
+
 Some of the assets will need to be moved and the apachecon.css theme included in the HTML.
 
 If you add ?print-pdf at the end of the URL, you can then print the slide deck into a PDF document.
