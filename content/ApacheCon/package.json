@@ -4,9 +4,9 @@
   "description": "Slides for ApacheCon",
   "main": "reveal.js",
   "scripts": {
-    "render": "node convert-slides.js",
+    "build": "node convert-slides.js",
     "serve": "node serve.js",
-    "serve-dev": "WATCH=true node serve.js"
+    "start": "WATCH=true node serve.js"
   },
   "keywords": [],
   "author": "",

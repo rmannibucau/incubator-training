@@ -17,7 +17,7 @@ For node install the dependacies:
 
 To generate the slides via:
 
-`npm run render`
+`npm run build`
 
 To serve the slides via:
 
@@ -25,7 +25,7 @@ To serve the slides via:
 
 To serve the slides and watch changes, run:
 
-`npm run serve-dev`
+`npm start`
 
 Some of the assets will need to be moved and the apachecon.css theme included in the HTML.
 

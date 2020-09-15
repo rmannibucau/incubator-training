@@ -55,10 +55,10 @@ TBD
 
 == Romain Manni-Bucau
 
-image:romain/twitter.png[width=100%]
-image:romain/blog.png[width=100%]
-image:romain/github.png[width=100%]
-image:romain/yupiik.png[width=100%]
+link:https://twitter.com/rmannibucau[image:romain/twitter.png[width=100%], window="_blank"]
+link:https://rmannibucau.metawerx.net[image:romain/blog.png[width=100%], window="_blank"]
+link:https://twitter.com/rmannibucau[image:romain/github.png[width=100%], window="_blank"]
+link:https://www.yupiik.com/[image:romain/yupiik.png[width=100%], window="_blank"]
 
 == Introducing HerdDB
 
@@ -73,6 +73,14 @@ EmailSuccess is a pure Java application and it is a distributed system.
 * Run embedded in the host client Java application.
 * Support high-availability.
 * Support horizontal scalability.
+
+== Design
+
+TODO: scalability, fault tolerance etc?
+
+== Benchmarks
+
+TODO: compare to MySQL (potentially pg?), must include findById + findAllWithWhereClause cases IMHO
 
 == JDBC is good but JPA is better
 
@@ -94,7 +102,7 @@ EmailSuccess is a pure Java application and it is a distributed system.
 == JPA Challenges
 
 [%step]
-* JPA issue SQL statements. All database are all SQL based but make it vary/enhance it
+* JPA issue SQL statements. All databases are all SQL based but make it vary/enhance it
 * All databases use custom types (even if some overlap)
 +
 > So all JPA providers abstract each database by a dialect/dictionary/platform.
@@ -130,12 +138,20 @@ DELETE FROM `MyEntity` WHERE `id` = ? AND `version` = ?
 
 == Custom OpenJPA dictionary
 
-[source]
+[source,subs=+quotes]
 ----
-[main] INFO openjpa.Runtime - Starting OpenJPA 3.1.3-SNAPSHOT
-[main] INFO openjpa.jdbc.JDBC - Using dictionary class "org.apache.openjpa.jdbc.sql.HerdDBDictionary" (HerdDB  ,HerdDB 0.0).
-[main] INFO openjpa.jdbc.JDBC - Connected to HerdDB version 0.0 using JDBC driver HerdDB version 0.0.
+INFO openjpa.Runtime - Starting *OpenJPA* 3.1.3
+INFO openjpa.jdbc.JDBC - Using dictionary class "*org.apache.openjpa.jdbc.sql.HerdDBDictionary*" (HerdDB  ,HerdDB 0.0).
+INFO openjpa.jdbc.JDBC - Connected to *HerdDB* version 0.0 using JDBC driver HerdDB version 0.0.
 ----
+
+[%step]
+* Automatically detected (as any other database)
+* Handled quoting
+* Handled reserved keywords
+* Handled case
+* Handled delimiters
+* Almost an Apache Calcite dictionary
 
 == Usage challenges
 
@@ -145,9 +161,49 @@ DELETE FROM `MyEntity` WHERE `id` = ? AND `version` = ?
 * H2/HSQLDB are light
 ** HerdDB must stay light (in its fatjar bundle) to compete with these alternatives in embed mode
 
-== Usage figures
+== Usage figures 1/2
 
-TBD: sizes, times, graphs, etc...
+[opts="header"]
+|===
+| Criteria               | H2        | Herdb
+| Driver Size            | 2.2M      | 61K (+ netty + calcite + bookkeeper)/35M (shadowed)
+| Local setup cost (ms)  | 11ms      | 1.9s
+|===
+
+NOTE: uses a minimal database to only take into account driver cost.
+
+== Usage figures 2/2
+
+[opts="header"]
+|===
+| Criteria  | H2    | Herdb
+| Java 8    | 1.15s | 2.8s
+| Java 11   | 1.38s | 2.7s
+|===
+
+NOTE: uses a real application database in an application using netty for the HTTP server (so classes are already loaded), still in local mode. 35 tables (max 75 columns in a table), 35 indices, 302 columns, 10 select all executed in main tables.
+
+TIP: CDS can /2 the startup time (but not usable in tests).
+
+== Usage figures: warning
+
+> THIS IS ONLY ABOUT STARTUP TIME, RUNTIME IS FINE!
+
+== JPA Conclusion
+
+[%step]
+* Herddb is trivial to setup
+* Herddb can replace any database almost transparently
+* Herddb can optimize your scalability in several cases
+* Herddb is not yet a testing replacement of H2/HSQLDB
+* Herddb is a RDBMS self-hostable (embeddable) and scalable, it is your Cloud friend
+** Saves a lot of $$ compared to managed instances
+
+== What about k8s
+
+Challenge with Kubernetes: persistence and retention.
+
+TODO: yamls
 
 [%notitle.big-thanks]
 == Thanks

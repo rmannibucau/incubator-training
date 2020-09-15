@@ -166,7 +166,6 @@ body {
 .reveal blockquote {
   display: block;
   position: relative;
-  width: 70%;
   margin: 20px auto;
   padding: 5px;
   font-style: italic;
@@ -499,4 +498,8 @@ div.openblock.righttitle > div.content > div:first-child.paragraph {
 .reveal {
   background-size: cover;
   background-image: url(background.jpg)
+}
+
+code.language-none {
+  color: black !important;
 }
