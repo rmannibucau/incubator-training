@@ -74,9 +74,113 @@ EmailSuccess is a pure Java application and it is a distributed system.
 * Support high-availability.
 * Support horizontal scalability.
 
+== HerdDB history
+
+HerdDB is a Distributed Database System, designed from the ground up to run inside the same process of client applications.
+
+The project started inside EmailSuccess.com, a Mail Transfer Agent (like sendmail).
+
+EmailSuccess is a written in Java and it initially we used MySQL to store message state.
+
+In 2016 we started the development of EmailSuccess Cluster and we needed a better solution for storing message state.
+
+.Requisites:
+
+* Embedded: The database should run inside the same Java process (like SQLLite)
+* Replicated: The database should scale out and offer high-availability automatically
+
+Solutions were already present on the market, but nothing could meet both of the requirements.
+
+== HerdDB users
+
+Currently HerdDB is used in production:
+
+* As Primary SQL DB for EmailSuccess.com standalone and cluster
+* As SQL Database for Apache Pulsar Manager (https://github.com/apache/pulsar-manager)
+* As Metadata Service on BlobIt – Binary Large Object Storage built over Apache BookKeeper (https://github.com/diennea/blobit)
+* As Configuration and Certificate store for CarapaceProxy HTTP server (https://github.com/diennea/carapaceproxy)
+* As MySQL replacement in a few other non Open Source internal products at https://diennea.com
+* In HerdDB Collections Framework flavour at https://magnews.com 
+
+== Embbeding the database
+
+.Advantages
+* No additional deployment and management tools for users.
+* The database is hidden to the user, you have to manage «only» the application.
+* The application is tested with only one version of the Database (the same as in production).
+* Easier to test for developers  (run the DB in-memory for unit tests).
+
+.Challenges:
+* Memory management: the DB cannot use all of the heap of the client application.
+* Have sensible defaults and enable automatic management routines by default.
+* Handle upgrade procedures automatically, without manual intervention.
+* Pay much attention to wire protocol changes and to disk formats.
+
+== Replication: high-availability  and scalability.
+
+.Benefits:
+* Work even in case of temporary or permanent loss of machines.
+* Keep data closer to the clients.
+* No shared disks or network file systems.
+* Scale out by adding machines to the application.
+
+.Challenges:
+* Handle gracefully temporary failures: long GC pauses, application restart.
+* Understand storage topology: WAL and cold Data have separate replication mechanisms.
+* Need some external source of truth: Apache ZooKeeper.
+
 == Design
 
-TODO: scalability, fault tolerance etc?
+.HerdDB model
+* TableSpaces: a TableSpace is a group of Tables, very like to a "database" in MySQL world.
+* Table: table is a table !
+* Transactions: ransactions and joins that span tables of the same TableSpace
+
+A TableSpace must reside entirely on every machine assigned to it.
+
+== Tables: a key-value store seen as an SQL structure
+
+* A Table is a simple key-value dictionary (byte[] -> byte[]).
+* Clients use JDBC API and SQL language.
+* On top of the key-value structure we have a SQL layer:
+** Key = Primary Key
+** Value = All of the other columns
+
+We are using Apache Calcite for SQL work: Parser and Planner.
+
+== Tables: a key-value store seen as an SQL structure
+
+Core Data Structures:
+
+* Data Page: a bunch of records, indexes by PK (hashmap)
+* Primary Key Index: a map that binds a PK value to the id of a data page
+* Dirty Page Buffer: a Data Page that is open for writes
+* Secondary indexes: they map a value to a set of PKs
+
+HerdDB Collections Framework uses directly the Key Value structure without the SQL layer.
+
+== Replication overview
+
+An HerdDB cluster is made of:
+
+* HerdDB servers
+* Apache BookKeeper servers (Bookies)
+* Apache ZooKeeeper servers
+
+Each TableSpace elects a *leader* node.
+
+Apache BookKeeper guarantees the consistency of the cluster
+Apache ZooKeeper handles metadata and provides service discovery
+
+== Replication overview
+
+How replication works:
+
+* Clients talk only to the *leader*
+* Changes are written to the Bookies that represent the write-ahead-log
+* Other nodes (*followers*) tail the write-ahead-log and apply locally the same changes (async replication)
+* When a *follower* is promoted to *leader* it fences out the old leader
+
 
 == Benchmarks
 
