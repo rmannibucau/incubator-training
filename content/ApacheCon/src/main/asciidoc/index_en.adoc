@@ -138,6 +138,8 @@ Currently HerdDB is used in production:
 
 A TableSpace must reside entirely on every machine assigned to it.
 
+image:herddbtablespace.png[width=100%]
+
 == Tables: a key-value store seen as an SQL structure
 
 * A Table is a simple key-value dictionary (byte[] -> byte[]).
@@ -184,7 +186,23 @@ How replication works:
 
 == Benchmarks
 
-TODO: compare to MySQL (potentially pg?), must include findById + findAllWithWhereClause cases IMHO
+Comparing MySQL vs HerdDB on a bare metal machine with SSD, on Linux, JDK13.
+
+[opts="header"]
+|===
+| YCSB Workload | HerdDB 0.19.0 (ops/s) | MySQL 5.7.24  (ops/s) | Ratio | Description
+| Loadphase |21239	| 5153	| 412%	|100% INSERT
+| WorkloadA | 10877 | 9829 |  111%	|50% READ - 50% UPDATE
+| WorkloadB | 42616 | 34090 |  125%	|95% READ - 5% UPDATE
+| WorkloadC | 52343 | 9829 |  141%	|100% READ
+| WorkloadD | 47129 | 33553 |  140%	|95% READ (latest rows) - 5% INSERT
+| WorkloadE | 12342 | 9487 |  130%	|95% SCAN (short range of records) - 5% INSERT
+| WorkloadF | 9977 | 9462 |  105%	|50% READ - 50% READ,MODIFY,WRITE
+| WorkloadEMS | 19686 | 5749 | 342%	|342	32% INSERT - 64% UPDATE - 4% READ
+|===
+
+
+image:ycsb.png[width=100%]
 
 == JDBC is good but JPA is better
 
