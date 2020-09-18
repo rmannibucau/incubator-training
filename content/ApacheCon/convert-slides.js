@@ -32,6 +32,7 @@ const options = {
         'source-highlighter': 'highlightjs',
         'title-slide-background-image': 'ApacheCon_bg.jpg',
         'highlightjs-theme': 'styles/github.css',
+        'icons': 'font',
     },
 };
 

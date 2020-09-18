@@ -283,28 +283,22 @@ INFO openjpa.jdbc.JDBC - Connected to *HerdDB* version 0.0 using JDBC driver Her
 * H2/HSQLDB are light
 ** HerdDB must stay light (in its fatjar bundle) to compete with these alternatives in embed mode
 
-== Usage figures 1/2
+== Usage figures
 
-[opts="header"]
+Uses petstore demo application (small but real like app) with a few data (test alike).
+
+[opts="header",role="medium"]
 |===
-| Criteria               | H2        | Herdb
-| Driver Size            | 2.2M      | 61K (+ netty + calcite + bookkeeper)/35M (shadowed)
-| Local setup cost (ms)  | 11ms      | 1.9s
-|===
-
-NOTE: uses a minimal database to only take into account driver cost.
-
-== Usage figures 2/2
-
-[opts="header"]
-|===
-| Criteria  | H2    | Herdb
-| Java 8    | 1.15s | 2.8s
-| Java 11   | 1.38s | 2.7s
+| Criteria                    | H2    | MySQL | Herdb (embedded) | HerdDB remote (sync) | HerdDB remote (async flush)
+| First findall               | 154ms | 176ms | 187ms | 196ms | 169ms
+| Hot   findall               | 1.0ms | 1.0ms | 5.5ms | 2.9ms | 2.8ms
+| Startup/DS creation (empty) | 463ms | 764ms | 948ms | 393ms | 393ms
 |===
 
-NOTE: uses a real application database in an application using netty for the HTTP server (so classes are already loaded), still in local mode. 35 tables (max 75 columns in a table), 35 indices, 302 columns, 10 select all executed in main tables.
+[.medium]
+NOTE: similar figures for a real application, still in local mode. 35 tables (max 75 columns in a table), 35 indices, 302 columns, 10 select all executed in main tables.
 
+[.medium]
 TIP: CDS can /2 the startup time (but not usable in tests).
 
 == Usage figures: warning

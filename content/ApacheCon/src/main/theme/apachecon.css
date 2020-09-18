@@ -503,3 +503,18 @@ div.openblock.righttitle > div.content > div:first-child.paragraph {
 code.language-none {
   color: black !important;
 }
+
+table.grid-all>thead>tr>.tableblock {
+  border-width: 1px 1px 2px 1px;
+  border-color: black;
+}
+table.grid-all>tbody>tr>.tableblock {
+  border-width: 1px 1px 1px 1px;
+  border-color: black;
+}
+table.tableblock, th.tableblock, td.tableblock {
+  border: 1px solid black !important;
+}
+.medium {
+  font-size: medium !important;
+}
