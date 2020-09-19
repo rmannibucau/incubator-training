@@ -479,9 +479,13 @@ body {
   column-count: 2;
 }
 
+.big p {
+  font-size: 3rem;
+}
 .big-thanks p {
   font-size: 10rem;
   color: white;
+  text-shadow: 1px 2px black, 1px -1px 2px black, -1px 1px 2px black, -1px -1px 2px black;
 }
 
 .toplogo {

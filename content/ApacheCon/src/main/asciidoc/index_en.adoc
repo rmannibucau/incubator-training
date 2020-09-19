@@ -299,11 +299,7 @@ Uses petstore demo application (small but real like app) with a few data (test a
 NOTE: similar figures for a real application, still in local mode. 35 tables (max 75 columns in a table), 35 indices, 302 columns, 10 select all executed in main tables.
 
 [.medium]
-TIP: CDS can /2 the startup time (but not usable in tests).
-
-== Usage figures: warning
-
-> THIS IS ONLY ABOUT STARTUP TIME, RUNTIME IS FINE!
+TIP: CDS can /2 the startup time (but not that usable in tests).
 
 == JPA Conclusion
 
@@ -319,7 +315,35 @@ TIP: CDS can /2 the startup time (but not usable in tests).
 
 Challenge with Kubernetes: persistence and retention.
 
-TODO: yamls
+[%step]
+* Kubernetes and persistence options:
+** Persistence Volume (+ Claim) - local or remote storage (S3, NFS, ...)
+** StatefuleSet (combine deployments and PV/PVC) - better but has some "bugs"
+
+== HerdDB as a kill them all solution?
+
+[%step]
+* Enables to abstract the cloud provider
+* Enables to still use SQL and not depend on HTTP services (MinIO) without tx support
+* Enables to deploy the same application on promise or cloud providers
+* Enables to optimize the deployment (replica in the app or same pod than the app)
+
+== HerdDB the Modern DB
+
+[%step]
+* OpenSource (+ free)
+* Fault Tolerant and Scalable (cloud friendly)
+* Managed as a service - embed or not - (/application) so cheaper than managed DB
+* Usable in tests and prod (less surprises)
+* Compatible with most SQL tools (so all our tools)
+* Evolutive (thanks SQL) compared to NoSQL
+
+[.big]
+== Last word
+
+> Databases are moving from vendor reserved area to developers are in a cloud native way. Be prepared!
+
+> Great power comes great responsibility!
 
 [%notitle.big-thanks]
 == Thanks
@@ -330,157 +354,3 @@ image:ApacheConAtHome.png[width=100%]
 
 Thanks
 Questions?
-
-[%notitle]
-== {talk}
-image::AtHomeSpiceRack.jpg[canvas]
-
-[.centered]
---
-{talk}
-
-'''
-
-{author}
---
-
-[.conferenceName]
-{conference_home} +
-{dates}
-
-[.year]
-{year}
-
-[%notitle]
-== {talk}
-image::AtHomeDesktop.jpg[canvas]
-
-[.centered]
---
-{talk}
-
-'''
-
-{author}
---
-
-[.conferenceName]
-{conference_home} +
-{dates}
-
-[.year]
-{year}
-
-[%notitle]
-== {talk}
-image::AtHomeDesktopII.jpg[canvas]
-
-[.centered]
---
-{talk}
-
-'''
-
-{author}
---
-
-[.conferenceName]
-{conference_home} +
-{dates}
-
-[.year]
-{year}
-
-[%notitle]
-== {talk}
-image::AtHomeOutside.jpg[canvas]
-
-[.centered]
---
-{talk}
-
-'''
-
-{author}
---
-
-[.conferenceName]
-{conference_home} +
-{dates}
-
-[.year]
-{year}
-
-== Simple Slide
-* one
-* two
-* three
-
-[.notes]
---
-Speaker notes go here
---
-
-== Sub Points
-* one
-** and this
-** and more
-* two
-* three
-
-
-== Styles and Custom Styles
-Text can be **bold**, __italic__, [.big]#big# or [.small]#small#
-
-== Image
-image::ApacheConAtHome.png[]
-
-== Two Columns
-[.twocolumns]
---
-* one
-* two
-* three
-
-image::ApacheConAtHome.png[]
---
-
-== Command Line
-monospace text - find and copy all the images! +
-`find . -name "*.jpg" -exec cp {} images \;`
-
-== Java Code
-
-[source,java]
-----
-public class HelloWorld {
-
-    public static void main(String[] args) {
-        System.out.println("Hello, World");
-    }
-}
-----
-
-
-== Optional Slides
-Press down arrow to see the optional slide.
-
-=== Optional Slide
-This is an optional slide.
-
-== Quote
-[quote, Albert Einstein]
-A person who never made a mistake never tried anything new.
-
-== Passthrough
-Anything in a passthrough  is passed to the output unprocessed so you can include raw HTML and Javascript.
-
-++++
-<p>This is a <b>HTML</b> paragraph</p>
-++++
-
-
-== Apache Training Project
-
-These slides are part of the Apache Training project.
-https://training.apache.org
