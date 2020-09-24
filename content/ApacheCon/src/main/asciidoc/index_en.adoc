@@ -51,50 +51,57 @@ image:ApacheConAtHome.png[width=100%]
 
 == Enrico Olivelli
 
-TBD
+Working at link:https://emailsuccess.com/[EmailSuccess.com] and link:https://magnews.com/[MagNews.com]
+
+OpenSource enthusiast, contributing to ASF projects BookKeeper, ZooKeeper, Curator, Pulsar, Maven.
+
+link:https://twitter.com/eolivelli[@eolivelli] on Twitter
+
+link:https://github.com/eolivelli[@eolivelli] on GitHub
+
 
 == Romain Manni-Bucau
 
 link:https://twitter.com/rmannibucau[image:romain/twitter.png[width=100%], window="_blank"]
 link:https://rmannibucau.metawerx.net[image:romain/blog.png[width=100%], window="_blank"]
-link:https://twitter.com/rmannibucau[image:romain/github.png[width=100%], window="_blank"]
+link:https://github.com/rmannibucau[image:romain/github.png[width=100%], window="_blank"]
 link:https://www.yupiik.com/[image:romain/yupiik.png[width=100%], window="_blank"]
 
 == Introducing HerdDB
 
-Why HerdDB ?
+image:herddblogo.png[HerdDB,200,100,float=right]
 
-HerdDB started inside EmailSuccess.com as a replacement for MySQL.
-
-EmailSuccess is a pure Java application and it is a distributed system.
-
-.HerdDB design requirements:
-* Support JDBC and be compatible with MySQL dialect.
+[%step]
+* HerdDB is a Distributed SQL Database written in Java.
+* JDBC support
+* MySQL compatible dialect.
 * Run embedded in the host client Java application.
 * Support high-availability.
 * Support horizontal scalability.
 
 == HerdDB history
 
-HerdDB is a Distributed Database System, designed from the ground up to run inside the same process of client applications.
+.Motivations:
+[%step]
+* Started inside EmailSuccess.com as a replacement for MySQL.
+* EmailSuccess is a written in Java and it uses a DB to store message state.
+* In 2016 we started the development of EmailSuccess Cluster
+* We needed a better solution for storing message state.
 
-The project started inside EmailSuccess.com, a Mail Transfer Agent (like sendmail).
-
-EmailSuccess is a written in Java and it initially we used MySQL to store message state.
-
-In 2016 we started the development of EmailSuccess Cluster and we needed a better solution for storing message state.
+== HerdDB history
 
 .Requisites:
-
+[%step]
 * Embedded: The database should run inside the same Java process (like SQLLite)
 * Replicated: The database should scale out and offer high-availability automatically
 
-Solutions were already present on the market, but nothing could meet both of the requirements.
+[%step]
+* Solutions were already present on the market, but nothing could meet both of the requirements.
 
 == HerdDB users
 
 Currently HerdDB is used in production:
-
+[%step]
 * As Primary SQL DB for EmailSuccess.com standalone and cluster
 * As SQL Database for Apache Pulsar Manager (https://github.com/apache/pulsar-manager)
 * As Metadata Service on BlobIt – Binary Large Object Storage built over Apache BookKeeper (https://github.com/diennea/blobit)
@@ -105,12 +112,14 @@ Currently HerdDB is used in production:
 == Embbeding the database
 
 .Advantages
+[%step]
 * No additional deployment and management tools for users.
 * The database is hidden to the user, you have to manage «only» the application.
 * The application is tested with only one version of the Database (the same as in production).
 * Easier to test for developers  (run the DB in-memory for unit tests).
 
 .Challenges:
+[%step]
 * Memory management: the DB cannot use all of the heap of the client application.
 * Have sensible defaults and enable automatic management routines by default.
 * Handle upgrade procedures automatically, without manual intervention.
@@ -119,47 +128,50 @@ Currently HerdDB is used in production:
 == Replication: high-availability  and scalability.
 
 .Benefits:
+[%step]
 * Work even in case of temporary or permanent loss of machines.
 * Keep data closer to the clients.
 * No shared disks or network file systems.
 * Scale out by adding machines to the application.
 
+== Replication: high-availability  and scalability.
+
 .Challenges:
+[%step]
 * Handle gracefully temporary failures: long GC pauses, application restart.
 * Understand storage topology: WAL and cold Data have separate replication mechanisms.
 * Need some external source of truth: Apache ZooKeeper.
 
-== Design
+== HerdDB model
 
-.HerdDB model
+image:herddbtablespace.png[width=80%]
+
+[%step]
 * TableSpaces: a TableSpace is a group of Tables, very like to a "database" in MySQL world.
 * Table: table is a table !
-* Transactions: ransactions and joins that span tables of the same TableSpace
+* Transactions: Transactions and Joins can span tables of the same TableSpace
+* A TableSpace must reside entirely on every machine assigned to it.
 
-A TableSpace must reside entirely on every machine assigned to it.
-
-image:herddbtablespace.png[width=100%]
 
 == Tables: a key-value store seen as an SQL structure
 
+[%step]
 * A Table is a simple key-value dictionary (byte[] -> byte[]).
 * Clients use JDBC API and SQL language.
 * On top of the key-value structure we have a SQL layer:
 ** Key = Primary Key
 ** Value = All of the other columns
+* We are using Apache Calcite for SQL work: Parser and Planner.
+* Working on a smaller jSQLParser based stack.
 
-We are using Apache Calcite for SQL work: Parser and Planner.
+== Tables: Core Data Structures
 
-== Tables: a key-value store seen as an SQL structure
-
-Core Data Structures:
-
+[%step]
 * Data Page: a bunch of records, indexes by PK (hashmap)
 * Primary Key Index: a map that binds a PK value to the id of a data page
 * Dirty Page Buffer: a Data Page that is open for writes
 * Secondary indexes: they map a value to a set of PKs
-
-HerdDB Collections Framework uses directly the Key Value structure without the SQL layer.
+* HerdDB Collections Framework uses directly the Key Value structure without the SQL layer.
 
 == Replication overview
 
@@ -169,20 +181,19 @@ An HerdDB cluster is made of:
 * Apache BookKeeper servers (Bookies)
 * Apache ZooKeeeper servers
 
-Each TableSpace elects a *leader* node.
+Each TableSpace elects a *leader* node
 
-Apache BookKeeper guarantees the consistency of the cluster
-Apache ZooKeeper handles metadata and provides service discovery
+BookKeeper guarantees the consistency of the cluster
+ZooKeeper handles metadata and provides service discovery
 
-== Replication overview
-
-How replication works:
+== How replication works
 
 * Clients talk only to the *leader*
 * Changes are written to the Bookies that represent the write-ahead-log
 * Other nodes (*followers*) tail the write-ahead-log and apply locally the same changes (async replication)
 * When a *follower* is promoted to *leader* it fences out the old leader
 
+image:replication.png[]
 
 == Benchmarks
 

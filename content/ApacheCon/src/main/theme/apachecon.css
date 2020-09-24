@@ -449,6 +449,10 @@ body {
   top: 40px;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .righttitle {
   position: fixed;
   right: 0;
