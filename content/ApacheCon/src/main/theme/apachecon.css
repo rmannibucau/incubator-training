@@ -356,9 +356,6 @@ body {
 /*********************************************
  * SLIDE NUMBER
  *********************************************/
-.reveal .slide-number {
-  color: #42affa;
-}
 
 .reveal .red {
   color: red;
@@ -531,6 +528,41 @@ table.tableblock, th.tableblock, td.tableblock {
   margin: 0 !important;
 }
 
-.wide, div.wide > ul {
+.wide, div.wide > ul, pre {
   width: 100% !important;
+}
+.no-margin, .no-margin > img{
+  margin: 0 !important;
+}
+.no-margin li > div.listingblock > div.content > pre, .no-margin li > p {
+  margin: 10px 0 !important;
+}
+
+
+.hljs-tag {
+  background: unset !important;
+}
+
+
+.fa-red {
+  color: darkred;
+}
+.fa-green, td.icon  > i[title="Tip"] {
+  color: darkgreen;
+}
+.fa-blue, td.icon  > i[title="Note"] {
+  color: darkblue;
+}
+.fa-yellow {
+  color: darkorange;
+}
+
+.slide-number {
+  background-color: unset;
+  color: black;
+}
+
+.side-by-side > div {
+  width: 50%;
+  display: table-cell;
 }

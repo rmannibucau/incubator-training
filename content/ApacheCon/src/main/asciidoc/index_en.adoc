@@ -186,6 +186,7 @@ Each TableSpace elects a *leader* node
 BookKeeper guarantees the consistency of the cluster
 ZooKeeper handles metadata and provides service discovery
 
+[.side-by-side]
 == How replication works
 
 * Clients talk only to the *leader*
@@ -249,13 +250,26 @@ image:ycsb.png[width=100%]
 [.small-margin.medium]
 == JPA statements example
 
-[plantuml,format=svg,role=sequence]
+[plantuml,format=svg,role="no-margin"]
 ....
 left to right direction
 MyEntity "1" *-- "*" MyEntity_tags : contains
 ....
 
-[%step.wide]
+[source,java]
+----
+@Entity
+@Getter @Setter
+public class MyEntity {
+    @Id private String id;
+    // ...
+    @CollectionTable
+    private Collection<String> tags;
+
+}
+----
+
+[%step.wide.no-margin]
 - DDL (table)
 +
 [source,sql]
@@ -294,14 +308,38 @@ DELETE FROM `MyEntity_tags` WHERE `MyEntity_id` = ?
 DELETE FROM `MyEntity` WHERE `id` = ? AND `version` = ? 
 ----
 
-== Custom OpenJPA dictionary
+== Specific OpenJPA dictionary 1/2
 
+[%step]
+* `persistence.xml`
++
+[source,xml,subs=+quotes]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+                http://xmlns.jcp.org/xml/ns/persistence
+                http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+  <persistence-unit name="applicationPetstorePU" transaction-type="JTA">
+    <jta-data-source>java:global/datasource/petstore</jta-data-source>
+  </persistence-unit>
+</persistence>
+----
++
+** Nothing special!
++
+* Startup logs
++
 [source,subs=+quotes]
 ----
 INFO openjpa.Runtime - Starting *OpenJPA* 3.1.3
-INFO openjpa.jdbc.JDBC - Using dictionary class "*org.apache.openjpa.jdbc.sql.HerdDBDictionary*" (HerdDB  ,HerdDB 0.0).
-INFO openjpa.jdbc.JDBC - Connected to *HerdDB* version 0.0 using JDBC driver HerdDB version 0.0.
+INFO openjpa.jdbc.JDBC - Using dictionary class *"org.apache.openjpa.jdbc.sql.HerdDBDictionary"* (HerdDB 0.20.0 ,HerdDB 0.20.0).
+INFO openjpa.jdbc.JDBC - Connected to HerdDB version 0.20 using JDBC driver HerdDB version 0.20.0.
 ----
+
+== Specific OpenJPA dictionary 2/2
 
 [%step]
 * Automatically detected (as any other database)
@@ -309,7 +347,26 @@ INFO openjpa.jdbc.JDBC - Connected to *HerdDB* version 0.0 using JDBC driver Her
 * Handled reserved keywords
 * Handled case
 * Handled delimiters
-* Almost an Apache Calcite dictionary
+* Almost an Apache Calcite dictionary (even in `jsqlparser mode`)
+
+== DataSource definition
+
+[source,xml]
+----
+<Resource id="global/datasource/perstore" type="DataSource">
+    # JdbcUrl = jdbc:herddb:local?server.planner.type=jsqlparser
+    # JdbcUrl = jdbc:herddb:server:localhost:7000
+    # JdbcUrl = jdbc:herddb:zookeeper:server1:2181,server2:2181/herddb
+    JdbcUrl = jdbc:herddb:local
+    JdbcDriver = herddb.jdbc.Driver
+    UserName = sa
+    Password = hdb
+</Resource>
+----
+
+NOTE: this uses TomEE definition syntax but is generic
+
+TIP: can also be done in `persistence.xml` (icon:warning[yellow] pooling)
 
 == Usage challenges
 
