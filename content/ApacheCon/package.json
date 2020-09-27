@@ -14,8 +14,12 @@
   "dependencies": {
     "@asciidoctor/reveal.js": "^3.1.0",
     "asciidoctor": "^2.2.0",
+    "asciidoctor-plantuml": "^1.5.0",
     "chokidar": "^3.4.2",
+    "easy-livereload": "^1.4.3",
     "express": "4.17.1",
-    "highlight.js": "10.1.2"
+    "highlight.js": "10.1.2",
+    "livereload": "^0.9.1",
+    "node-dev": "^5.2.0"
   }
 }

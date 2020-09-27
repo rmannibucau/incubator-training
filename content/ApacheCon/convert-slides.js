@@ -17,8 +17,9 @@
  * under the License.
  */
 
-const asciidoctor = require('@asciidoctor/core')()
-const asciidoctorRevealjs = require('@asciidoctor/reveal.js')
+const asciidoctor = require('@asciidoctor/core')();
+const asciidoctorRevealjs = require('@asciidoctor/reveal.js');
+const plantuml = require('asciidoctor-plantuml');
 const options = {
     safe: 'safe',
     backend: 'revealjs',
@@ -31,12 +32,18 @@ const options = {
         'revealjs_history': true,
         'source-highlighter': 'highlightjs',
         'title-slide-background-image': 'ApacheCon_bg.jpg',
-        'highlightjs-theme': 'styles/github.css',
+        'highlightjs-theme': 'styles/idea.css',
         'icons': 'font',
+        // if running:
+        // $ docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
+        // you can set:
+        // 'plantuml-server-url': 'http://localhost:8080'
+        'plantuml-server-url': 'http://www.plantuml.com/plantuml',
     },
 };
 
 asciidoctorRevealjs.register();
+plantuml.register(asciidoctor.Extensions);
 const render = () => asciidoctor.convertFile('src/main/asciidoc/index_en.adoc', options);
 
 render();

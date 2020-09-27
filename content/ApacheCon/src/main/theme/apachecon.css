@@ -205,7 +205,7 @@ body {
   overflow: auto;
   max-height: 400px;
   word-wrap: normal;
-  color: #DCDCDC;
+  /*color: #DCDCDC;*/
   border: 1px solid black;
 }
 
@@ -525,4 +525,12 @@ table.tableblock, th.tableblock, td.tableblock {
 }
 .medium {
   font-size: medium !important;
+}
+
+.small-margin, div.small-margin > ul > li > p {
+  margin: 0 !important;
+}
+
+.wide, div.wide > ul {
+  width: 100% !important;
 }

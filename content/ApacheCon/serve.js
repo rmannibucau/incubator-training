@@ -2,22 +2,38 @@ const render = require('./convert-slides');
 
 const express = require('express');
 const server = express();
+
+const sources = [
+    'src/main/asciidoc/',
+    'src/main/resources/images/',
+    'src/main/theme/',
+    '.',
+];
+
+const useLiveReload = process.env.WATCH || false;
+if (useLiveReload) {
+    console.log('Enabling Livereload');
+    server.use(require('easy-livereload')({
+        watchDirs: sources,
+        port: process.env.LIVERELOAD_PORT || 35729,
+        checkFunc: file => file.endsWith('.html') || file.endsWith('.css') || file.endsWith('.js'),
+    }));
+}
+
 server.get('/', (req, res) => res.redirect('/index_en.html'));
 server.get('/render', (req, res) => {
     render.render();
     res.redirect('/index_en.html');
 });
 [
-    'src/main/asciidoc/',
-    'src/main/resources/images/',
-    'src/main/theme/',
+    ...sources,
     'node_modules/reveal.js/',
     'node_modules/highlight.js/',
-    '.',
 ].forEach(it => server.use('/', express.static(it)));
 
-server.listen(4200);
-console.log('http://localhost:4200');
+const port = +(process.env.SLIDES_PORT || '4200');
+server.listen(port);
+console.log('Slides available at http://localhost:' + port);
 
 if (process.env.WATCH) {
     let ready = 0;
