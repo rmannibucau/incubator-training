@@ -28,7 +28,7 @@
 :dates: Spt. 29th - Oct. 1st
 :year: 2020
 
-[%notitle]
+[%notitle.title-slide]
 == {talk}
 image::ApacheCon_bg.jpg[background,size=cover]
 
@@ -142,11 +142,13 @@ Currently HerdDB is used in production:
 * Understand storage topology: WAL and cold Data have separate replication mechanisms.
 * Need some external source of truth: Apache ZooKeeper.
 
+[.side-by-side]
 == HerdDB model
 
+[.side]
 image:herddbtablespace.png[width=80%]
 
-[%step]
+[%step.side.smaller]
 * TableSpaces: a TableSpace is a group of Tables, very like to a "database" in MySQL world.
 * Table: table is a table !
 * Transactions: Transactions and Joins can span tables of the same TableSpace
@@ -199,25 +201,27 @@ ZooKeeper handles metadata and provides service discovery
 image:replication.png[]
 
 [.medium]
-== Benchmarks
+== YCSB Benchmarks
 
-[opts="header",role="small-font-for-table",cols="1,1,1,1,3"]
+[opts="header",role="small-font-for-table",cols="1,2,2,2,6"]
 |===
-| YCSB Workload | HerdDB (ops/s) | MySQL (ops/s) | Ratio | Description
-| Loadphase |21239	| 5153	| 412%	|100% INSERT
-| WorkloadA | 10877 | 9829 |  111%	|50% READ - 50% UPDATE
-| WorkloadB | 42616 | 34090 |  125%	|95% READ - 5% UPDATE
-| WorkloadC | 52343 | 9829 |  141%	|100% READ
-| WorkloadD | 47129 | 33553 |  140%	|95% READ (latest rows) - 5% INSERT
-| WorkloadE | 12342 | 9487 |  130%	|95% SCAN (short range of records) - 5% INSERT
-| WorkloadF | 9977 | 9462 |  105%	|50% READ - 50% READ,MODIFY,WRITE
-| WorkloadEMS | 19686 | 5749 | 342%	|342	32% INSERT - 64% UPDATE - 4% READ
+| Workload | HerdDB (ops/s) | MySQL (ops/s) | Ratio | Description
+| Load |21 239	| 5 153	| 412%	|100% INSERT
+| A | 10 877 | 9 829 |  111%	|50% READ - 50% UPDATE (Update heavy)
+| B | 42 616 | 34 090 |  125%	|95% READ - 5% UPDATE (Read mostly)
+| C | 52 343 | 9 829 |  141%	|100% READ (Read Only)
+| D | 47 129 | 33 553 |  140%	|95% READ (latest rows) - 5% INSERT (Read latest)
+| E | 12 342 | 9 487 |  130%	|95% SCAN (short range of records) - 5% INSERT
+| F | 9 977 | 9 462 |  105%	|50% READ - 50% READ,MODIFY,WRITE
+| EMS | 19 686 | 5 749 | 342%	|32% INSERT - 64% UPDATE - 4% READ
 |===
 
 image:ycsb.png[width=75%]
 
 [.smaller]
 NOTE: result captures with HerdDB 0.19 and MySQL 5.7.24 on a bare metal machine with SSD, on Linux, JDK13.
+
+//NOTE:  more on https://github.com/brianfrankcooper/YCSB/wiki/Core-Workloads
 
 == JDBC is good but JPA is better
 
@@ -400,11 +404,11 @@ TIP: CDS can /2 the startup time (but not that usable in tests).
 == JPA Conclusion
 
 [%step]
-* Herddb is trivial to setup
-* Herddb can replace any database almost transparently
-* Herddb can optimize your scalability in several cases
-* Herddb is not yet a testing replacement of H2/HSQLDB
-* Herddb is a RDBMS self-hostable (embeddable) and scalable, it is your Cloud friend
+* HerdDB is trivial to setup
+* HerdDB can replace any database almost transparently
+* HerdDB can optimize your scalability in several cases
+* HerdDB is not yet a testing replacement of H2/HSQLDB
+* HerdDB is a RDBMS self-hostable (embeddable) and scalable, it is your Cloud friend
 ** Saves a lot of $$ compared to managed instances
 
 == What about k8s
@@ -437,7 +441,7 @@ Challenge with Kubernetes: persistence and retention.
 [.big]
 == Last word
 
-> Databases are moving from vendor reserved area to developers are in a cloud native way. Be prepared!
+> Databases are moving from vendor reserved area to developers in cloud native apps. Be prepared!
 
 > Great power comes great responsibility!
 
