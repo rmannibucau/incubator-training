@@ -523,6 +523,18 @@ table.tableblock, th.tableblock, td.tableblock {
 .medium {
   font-size: medium !important;
 }
+.small {
+  font-size: small !important;
+}
+.smaller {
+  font-size: smaller !important;
+}
+.medium p {
+  margin: 5px;
+}
+.small-font-for-table {
+  font-size: 14px !important;
+}
 
 .small-margin, div.small-margin > ul > li > p {
   margin: 0 !important;
@@ -562,7 +574,8 @@ table.tableblock, th.tableblock, td.tableblock {
   color: black;
 }
 
-.side-by-side > div {
-  width: 50%;
+.side-by-side > div.side, .side-by-side > table.side {
+  width: 50% !important;
   display: table-cell;
+  vertical-align: top;
 }
