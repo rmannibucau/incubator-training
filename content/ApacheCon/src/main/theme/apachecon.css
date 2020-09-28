@@ -523,6 +523,9 @@ table.grid-all>tbody>tr>.tableblock {
 table.tableblock, th.tableblock, td.tableblock {
   border: 1px solid black !important;
 }
+.large {
+  font-size: large !important;
+}
 .medium {
   font-size: medium !important;
 }

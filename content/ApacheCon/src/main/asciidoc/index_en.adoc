@@ -109,16 +109,19 @@ Currently HerdDB is used in production:
 * As MySQL replacement in a few other non Open Source internal products at https://diennea.com
 * In HerdDB Collections Framework flavour at https://magnews.com 
 
-== Embbeding the database
+[.side-by-side.large]
+== Embedding the database
 
-.Advantages
+[.side]
+.*Advantages* icon:check[green]
 [%step]
 * No additional deployment and management tools for users.
 * The database is hidden to the user, you have to manage «only» the application.
 * The application is tested with only one version of the Database (the same as in production).
 * Easier to test for developers  (run the DB in-memory for unit tests).
 
-.Challenges:
+[.side]
+.*Challenges* icon:question[yellow]
 [%step]
 * Memory management: the DB cannot use all of the heap of the client application.
 * Have sensible defaults and enable automatic management routines by default.
