@@ -428,7 +428,7 @@ Challenge with Kubernetes: persistence and retention.
 [%step]
 * Enables to abstract the cloud provider
 * Enables to still use SQL and not depend on HTTP services (MinIO) without tx support
-* Enables to deploy the same application on promise or cloud providers
+* Enables to deploy the same application on premise or cloud providers
 * Enables to optimize the deployment (replica in the app or same pod than the app)
 
 == HerdDB the Modern DB
