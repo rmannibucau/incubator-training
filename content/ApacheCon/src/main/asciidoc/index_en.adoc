@@ -67,6 +67,20 @@ link:https://rmannibucau.metawerx.net[image:romain/blog.png[width=100%], window=
 link:https://github.com/rmannibucau[image:romain/github.png[width=100%], window="_blank"]
 link:https://www.yupiik.com/[image:romain/yupiik.png[width=100%], window="_blank"]
 
+
+== Agenda
+
+- Why HerdDB ?
+- Advantages and challenges for an embedded SQL Database
+- HerdDB model and how replication works
+- Benchmarks with YCSB
+- Introducing JPA - Java Persistence API
+- JPA Challenges
+- OpenJPA meets HerdDB
+- Challenges switching from H2 to HerdDB
+- HerdDB on Kubernetes
+- Conclusions
+
 == Introducing HerdDB
 
 image:herddblogo.png[HerdDB,200,100,float=right]
@@ -253,7 +267,7 @@ NOTE: result captures with HerdDB 0.19 and MySQL 5.7.24 on a bare metal machine 
 * Joins must be supported
 * Case must be handled for HerdDB
 +
-> OpenJPA OOTB dictionnaries are case insensitive for example.
+> OpenJPA OOTB dictionaries are case insensitive for example.
 * Delimiters must be handled properly
 * Reserved words must be handled
 
