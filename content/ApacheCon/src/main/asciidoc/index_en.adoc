@@ -42,12 +42,6 @@ image:ApacheConAtHome.png[width=100%]
 {author}
 --
 
-[.conferenceName]
-{conference_home} +
-{dates}
-
-[.year]
-{year}
 
 == Enrico Olivelli
 
@@ -83,7 +77,7 @@ link:https://www.yupiik.com/[image:romain/yupiik.png[width=100%], window="_blank
 
 == Introducing HerdDB
 
-image:herddblogo.png[HerdDB,200,100,float=right]
+image:herddblogo.png[HerdDB]
 
 [%step]
 * HerdDB is a Distributed SQL Database written in Java.
