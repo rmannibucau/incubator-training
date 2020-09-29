@@ -136,22 +136,20 @@ Currently HerdDB is used in production:
 * Handle upgrade procedures automatically, without manual intervention.
 * Pay much attention to wire protocol changes and to disk formats.
 
-== Replication: high-availability  and scalability.
+== Replication: high-availability and scalability
 
-.Benefits:
 [%step]
 * Work even in case of temporary or permanent loss of machines.
 * Keep data closer to the clients.
 * No shared disks or network file systems.
 * Scale out by adding machines to the application.
 
-== Replication: high-availability  and scalability.
+== Replication: high-availability and scalability: challenges
 
-.Challenges:
 [%step]
 * Handle gracefully temporary failures: long GC pauses, application restart.
-* Understand storage topology: WAL and cold Data have separate replication mechanisms.
 * Need some external source of truth: Apache ZooKeeper.
+* Understand storage topology: WAL (BK) and Data have separate replication mechanisms.
 
 [.side-by-side]
 == HerdDB model
@@ -161,8 +159,10 @@ image:herddbtablespace.png[width=80%]
 
 [%step.side.smaller]
 * TableSpaces: a TableSpace is a group of Tables, very like to a "database" in MySQL world.
+* With one DataSource/JDBC URL you can connect to multiple tablespaces and servers
 * Table: table is a table !
-* Transactions: Transactions and Joins can span tables of the same TableSpace
+* Transactions: Transactions must span tables of the same TableSpace
+* Joins: Queries can only refer to tables of the same TableSpace
 * A TableSpace must reside entirely on every machine assigned to it.
 
 
