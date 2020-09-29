@@ -84,7 +84,7 @@ image:herddblogo.png[HerdDB,200,100,float=right]
 .Motivations:
 [%step]
 * Started inside EmailSuccess.com as a replacement for MySQL.
-* EmailSuccess is a written in Java and it uses a DB to store message state.
+* EmailSuccess is written in Java and it uses a DB to store message state.
 * In 2016 we started the development of EmailSuccess Cluster
 * We needed a better solution for storing message state.
 
@@ -102,10 +102,10 @@ image:herddblogo.png[HerdDB,200,100,float=right]
 
 Currently HerdDB is used in production:
 [%step]
-* As Primary SQL DB for EmailSuccess.com standalone and cluster
-* As SQL Database for Apache Pulsar Manager (https://github.com/apache/pulsar-manager)
-* As Metadata Service on BlobIt – Binary Large Object Storage built over Apache BookKeeper (https://github.com/diennea/blobit)
-* As Configuration and Certificate store for CarapaceProxy HTTP server (https://github.com/diennea/carapaceproxy)
+* As SQL DB for EmailSuccess.com standalone and cluster
+* As Database for Apache Pulsar Manager (https://github.com/apache/pulsar-manager)
+* As Metadata Service on BlobIt – Binary Large Object Storage (BK based) (https://github.com/diennea/blobit)
+* As Configuration and Certificate store for CarapaceProxy server (https://github.com/diennea/carapaceproxy)
 * As MySQL replacement in a few other non Open Source internal products at https://diennea.com
 * In HerdDB Collections Framework flavour at https://magnews.com 
 
