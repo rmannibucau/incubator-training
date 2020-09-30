@@ -73,7 +73,6 @@ link:https://www.yupiik.com/[image:romain/yupiik.png[width=80%], window="_blank"
 - OpenJPA meets HerdDB
 - Challenges switching from H2 to HerdDB
 - HerdDB on Kubernetes
-- Conclusions
 
 == Introducing HerdDB
 
