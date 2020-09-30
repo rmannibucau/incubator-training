@@ -53,13 +53,13 @@ link:https://twitter.com/eolivelli[@eolivelli] on Twitter
 
 link:https://github.com/eolivelli[@eolivelli] on GitHub
 
-
+[.medium]
 == Romain Manni-Bucau
 
-link:https://twitter.com/rmannibucau[image:romain/twitter.png[width=100%], window="_blank"]
-link:https://rmannibucau.metawerx.net[image:romain/blog.png[width=100%], window="_blank"]
-link:https://github.com/rmannibucau[image:romain/github.png[width=100%], window="_blank"]
-link:https://www.yupiik.com/[image:romain/yupiik.png[width=100%], window="_blank"]
+link:https://twitter.com/rmannibucau[image:romain/twitter.png[width=80%], window="_blank"]
+link:https://rmannibucau.metawerx.net[image:romain/blog.png[width=80%], window="_blank"]
+link:https://github.com/rmannibucau[image:romain/github.png[width=80%], window="_blank"]
+link:https://www.yupiik.com/[image:romain/yupiik.png[width=80%], window="_blank"]
 
 
 == Agenda
@@ -106,6 +106,7 @@ image:herddblogo.png[HerdDB]
 [%step]
 * Solutions were already present on the market, but nothing could meet both of the requirements.
 
+[.larger]
 == HerdDB users
 
 Currently HerdDB is used in production:
@@ -180,7 +181,7 @@ image:herddbtablespace.png[width=80%]
 == Tables: Core Data Structures
 
 [%step]
-* Data Page: a bunch of records, indexes by PK (hashmap)
+* Data Page: a bunch of records, indexed by PK (hashmap)
 * Primary Key Index: a map that binds a PK value to the id of a data page
 * Dirty Page Buffer: a Data Page that is open for writes
 * Secondary indexes: they map a value to a set of PKs
@@ -230,7 +231,7 @@ image:replication.png[]
 image:ycsb.png[width=75%]
 
 [.smaller]
-NOTE: result captures with HerdDB 0.19 and MySQL 5.7.24 on a bare metal machine with SSD, on Linux, JDK13.
+NOTE: result captured with HerdDB 0.19 and MySQL 5.7.24 on a bare metal machine with SSD, on Linux, JDK13.
 
 //NOTE:  more on https://github.com/brianfrankcooper/YCSB/wiki/Core-Workloads
 
