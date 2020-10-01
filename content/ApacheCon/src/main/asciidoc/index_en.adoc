@@ -440,7 +440,7 @@ Challenge with Kubernetes: persistence and retention.
 [%step]
 * Kubernetes and persistence options:
 ** Persistence Volume (+ Claim) - local or remote storage (S3, NFS, ...)
-** StatefuleSet (combine deployments and PV/PVC) - better but has some "bugs"
+** StatefulSet (combine deployments and PV/PVC) - better but has some "bugs"
 
 == HerdDB as a kill them all solution?
 
