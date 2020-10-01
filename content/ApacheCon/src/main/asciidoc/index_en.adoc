@@ -359,13 +359,24 @@ INFO openjpa.jdbc.JDBC - Connected to HerdDB version 0.20 using JDBC driver Herd
 
 == Specific OpenJPA dictionary 2/2
 
-[%step]
-* Automatically detected (as any other database)
-* Handled quoting
-* Handled reserved keywords
-* Handled case
-* Handled delimiters
-* Almost an Apache Calcite dictionary (even in `jsqlparser mode`)
+[source,java]
+----
+public class HerdDBDictionary extends DBDictionary {
+    public HerdDBDictionary() {
+        platform = "HerdDB";
+        databaseProductName = "HerdDB";
+        supportsForeignKeys = false;
+        supportsUniqueConstraints = false;
+        supportsCascadeDeleteAction = false;
+        schemaCase = SCHEMA_CASE_LOWER;
+        delimitedCase = SCHEMA_CASE_LOWER;
+        setDelimitIdentifiers(true);
+        setSupportsDelimitedIdentifiers(true);
+        setLeadingDelimiter("`");
+        setTrailingDelimiter("`");
+    }
+}
+----
 
 == DataSource definition
 
