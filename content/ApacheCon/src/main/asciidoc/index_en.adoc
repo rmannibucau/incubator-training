@@ -160,7 +160,6 @@ image:herddbtablespace.png[width=80%]
 [%step.side.smaller]
 * TableSpaces: a TableSpace is a group of Tables, very like to a "database" in MySQL world.
 * With one DataSource/JDBC URL you can connect to multiple tablespaces and servers
-* Table: table is a table !
 * Transactions: Transactions must span tables of the same TableSpace
 * Joins: Queries can only refer to tables of the same TableSpace
 * A TableSpace must reside entirely on every machine assigned to it.
